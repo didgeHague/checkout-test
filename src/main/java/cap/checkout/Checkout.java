@@ -1,0 +1,31 @@
+package cap.checkout;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Provides functionality for scanning items and calculating the total
+ * amount for the shop. 
+ * @author richhagu
+ *
+ */
+public class Checkout {
+	
+	private final List<Item> items = new ArrayList<>();
+	
+	/**
+	 * Adds the item to the list of all items scanned.
+	 * @param item {@link Item}
+	 */
+	public void scanItem(final Item item){
+		items.add(item);
+	}
+	
+	/**
+	 * Calculates the total price for all the scanned items.
+	 * @return float
+	 */
+	public float getTotal(){
+		return items.stream().map(Item::getPrice).reduce(0f, (a, b) -> a + b);
+	}
+}
