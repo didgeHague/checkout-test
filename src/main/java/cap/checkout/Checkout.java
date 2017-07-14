@@ -25,7 +25,17 @@ public class Checkout {
 	 * Calculates the total price for all the scanned items.
 	 * @return float
 	 */
-	public float getTotal(){
-		return items.stream().map(Item::getPrice).reduce(0f, (a, b) -> a + b);
+	public float getTotal(Offer... offers){
+		Float total = items.stream().map(Item::getPrice).reduce(0f, (a, b) -> a + b);
+		
+		if(offers != null){
+			for (Offer offer : offers) {
+				long count = items.stream().filter(item -> item.equals(offer.getItem())).count();
+				int threshold = offer.getThreshold();
+				long numReductions = count >= threshold ? Math.floorMod(count, threshold) : 0;
+				total -= numReductions * offer.getReduction();
+			}
+		}
+		return total;
 	}
 }
