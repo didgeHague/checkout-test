@@ -9,11 +9,18 @@
   <url>http://maven.apache.org</url>
 
   <properties>
+    <equalsverifier.version>2.3.1</equalsverifier.version>
     <junit.version>4.12</junit.version>
   </properties>
 
   <dependencies>
     <!-- Test -->
+	<dependency>
+	    <groupId>nl.jqno.equalsverifier</groupId>
+	    <artifactId>equalsverifier</artifactId>
+	    <version>${equalsverifier.version}</version>
+	    <scope>test</scope>
+	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
